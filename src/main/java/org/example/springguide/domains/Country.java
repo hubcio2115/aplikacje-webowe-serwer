@@ -10,7 +10,7 @@ import java.time.Year;
 public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "gdp")
@@ -42,11 +42,35 @@ public class Country implements Serializable {
         return gdp;
     }
 
+    public void setGdp(long gdp) {
+        this.gdp = gdp;
+    }
+
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean getIsInEurope() {
+        return isInEurope;
+    }
+
+    public void setIsInEurope(boolean isInEurope) {
+        this.isInEurope = isInEurope;
+    }
+
     public Year getFormationYear() {
         return formationYear;
+    }
+
+    public void setFormationYear(Year formationYear) {
+        this.formationYear = formationYear;
+    }
+
+    public Ruler getRuler() {
+        return this.ruler;
     }
 }
