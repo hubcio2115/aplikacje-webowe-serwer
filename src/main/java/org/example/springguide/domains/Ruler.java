@@ -1,6 +1,5 @@
 package org.example.springguide.domains;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -9,8 +8,8 @@ import java.sql.Date;
 @Table
 public class Ruler {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
@@ -28,5 +27,37 @@ public class Ruler {
     }
 
     public Ruler() {
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Date getOfficeStartDate() {
+        return officeStartDate;
+    }
+
+    public void setOfficeStartDate(Date officeStartDate) {
+        this.officeStartDate = officeStartDate;
     }
 }
