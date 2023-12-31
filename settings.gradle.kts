@@ -1,1 +1,1 @@
-rootProject.name = "lab06"
+rootProject.name = "aplikacje-webowe-server"

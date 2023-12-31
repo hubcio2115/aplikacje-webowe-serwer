@@ -1,4 +1,4 @@
-package org.example.springguide.domains;
+package org.example.server.domains;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

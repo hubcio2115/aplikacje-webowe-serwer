@@ -1,9 +1,9 @@
-package org.example.springguide.services;
+package org.example.server.services;
 
-import org.example.springguide.domains.Country;
-import org.example.springguide.domains.Ruler;
-import org.example.springguide.domains.RulerDTO;
-import org.example.springguide.domains.RulerRepository;
+import org.example.server.domains.Country;
+import org.example.server.domains.Ruler;
+import org.example.server.domains.RulerDTO;
+import org.example.server.domains.RulerRepository;
 import org.springframework.stereotype.Service;
 import lombok.val;
 

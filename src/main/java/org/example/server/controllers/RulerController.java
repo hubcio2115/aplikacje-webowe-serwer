@@ -1,9 +1,9 @@
-package org.example.springguide.controllers;
+package org.example.server.controllers;
 
-import org.example.springguide.domains.Ruler;
-import org.example.springguide.domains.RulerDTO;
-import org.example.springguide.services.CountryService;
-import org.example.springguide.services.RulerService;
+import org.example.server.domains.Ruler;
+import org.example.server.domains.RulerDTO;
+import org.example.server.services.CountryService;
+import org.example.server.services.RulerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.val;

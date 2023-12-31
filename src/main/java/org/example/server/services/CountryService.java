@@ -1,9 +1,8 @@
-package org.example.springguide.services;
+package org.example.server.services;
 
-import org.example.springguide.domains.Country;
-import org.example.springguide.domains.CountryDTO;
-import org.example.springguide.domains.CountryRepository;
-import org.example.springguide.domains.RulerRepository;
+import org.example.server.domains.Country;
+import org.example.server.domains.CountryDTO;
+import org.example.server.domains.CountryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
