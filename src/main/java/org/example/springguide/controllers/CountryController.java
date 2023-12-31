@@ -2,13 +2,14 @@ package org.example.springguide.controllers;
 
 import org.example.springguide.domains.Country;
 import org.example.springguide.domains.CountryDTO;
+import org.example.springguide.domains.CountryWithRulerDTO;
 import org.example.springguide.services.CountryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/countries")
 public class CountryController {
@@ -21,11 +22,15 @@ public class CountryController {
     @GetMapping
     ResponseEntity<List<Country>> getCountries() {
         return ResponseEntity.ok(this.countryService.getCountries());
-    }
+}
 
-    @GetMapping(":id")
-    ResponseEntity<Optional<Country>> getCountryById(@RequestParam long id) {
-        return ResponseEntity.ok(this.countryService.getById(id));
+    @GetMapping("{id}")
+    ResponseEntity<Country> getCountryById(@PathVariable long id) {
+        var country = this.countryService.getById(id);
+
+        return country
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -33,11 +38,21 @@ public class CountryController {
         return ResponseEntity.ok(this.countryService.addCountry(newCountry));
     }
 
-    @DeleteMapping(":id")
-    ResponseEntity<Optional<Country>> deleteCountry(@RequestParam long id) {
+    @DeleteMapping("{id}")
+    ResponseEntity<Country> deleteCountry(@PathVariable long id) {
         var deletedCountry = this.countryService.deleteById(id);
 
-        if (deletedCountry.isEmpty()) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(deletedCountry);
+        return deletedCountry
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("{id}")
+    ResponseEntity<Country> updateCountry(@PathVariable long id, @RequestBody CountryDTO country) {
+        var updatedCountry = this.countryService.updateCountryById(id, country);
+
+        return updatedCountry
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
