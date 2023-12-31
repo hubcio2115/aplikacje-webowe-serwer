@@ -1,12 +1,17 @@
 package org.example.springguide.domains;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.Year;
 
 @Entity
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,55 +27,4 @@ public class Country implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     private Ruler ruler;
-
-    public Country() {
-    }
-
-    public Country(String name, long gdp, Year formationYear, boolean isInEurope) {
-        this.name = name;
-        this.isInEurope = isInEurope;
-        this.gdp = gdp;
-        this.formationYear = formationYear;
-    }
-
-
-    public long getId() {
-        return id;
-    }
-
-    public long getGdp() {
-        return gdp;
-    }
-
-    public void setGdp(long gdp) {
-        this.gdp = gdp;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean getIsInEurope() {
-        return isInEurope;
-    }
-
-    public void setIsInEurope(boolean isInEurope) {
-        this.isInEurope = isInEurope;
-    }
-
-    public Year getFormationYear() {
-        return formationYear;
-    }
-
-    public void setFormationYear(Year formationYear) {
-        this.formationYear = formationYear;
-    }
-
-    public Ruler getRuler() {
-        return this.ruler;
-    }
 }

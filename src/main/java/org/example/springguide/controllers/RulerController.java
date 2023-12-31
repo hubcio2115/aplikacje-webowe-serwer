@@ -6,6 +6,7 @@ import org.example.springguide.services.CountryService;
 import org.example.springguide.services.RulerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import lombok.val;
 
 @CrossOrigin
 @RestController
@@ -21,7 +22,7 @@ public class RulerController {
 
     @GetMapping("{countryId}")
     public ResponseEntity<Ruler> getRulerByCountryId(@PathVariable long countryId) {
-        var ruler = this.rulerService.getRulerByCountryId(countryId);
+        val ruler = this.rulerService.getRulerByCountryId(countryId);
 
         return ruler
                 .map(ResponseEntity::ok)
@@ -30,11 +31,11 @@ public class RulerController {
 
     @PostMapping("{countryId}")
     public ResponseEntity<Ruler> addRuler(@PathVariable long countryId, @RequestBody RulerDTO ruler) {
-        var country = this.countryService.getById(countryId);
+        val country = this.countryService.getById(countryId);
 
         if (country.isEmpty()) return ResponseEntity.notFound().build();
 
-        var newRuler = this.rulerService.addRuler(ruler, country.get());
+        val newRuler = this.rulerService.addRuler(ruler, country.get());
 
         return newRuler
                 .map(ResponseEntity::ok)
@@ -43,7 +44,7 @@ public class RulerController {
 
     @PutMapping("{id}")
     public ResponseEntity<Ruler> updateRuler(@PathVariable long id, @RequestBody RulerDTO ruler) {
-        var updatedRuler = this.rulerService.updateRulerById(id, ruler);
+        val updatedRuler = this.rulerService.updateRulerById(id, ruler);
 
         return updatedRuler
                 .map(ResponseEntity::ok)

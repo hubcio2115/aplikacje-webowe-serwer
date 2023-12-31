@@ -14,10 +14,7 @@ public class CountryService {
     private final CountryRepository countryRepository;
     private final RulerService rulerService;
 
-    public CountryService(
-            CountryRepository countryRepository,
-            RulerService rulerService
-    ) {
+    public CountryService(CountryRepository countryRepository, RulerService rulerService) {
         this.countryRepository = countryRepository;
         this.rulerService = rulerService;
     }
@@ -31,17 +28,14 @@ public class CountryService {
     }
 
     public Country addCountry(CountryDTO country) {
-        var newCountry = new Country(country.name(), country.gdp(), country.formationYear(), country.isInEurope());
-
-        System.out.println(newCountry);
+        var newCountry = Country.builder().name(country.name()).gdp(country.gdp()).formationYear(country.formationYear()).isInEurope(country.isInEurope()).build();
 
         return this.countryRepository.save(newCountry);
     }
 
     public Optional<Country> deleteById(long id) {
         var country = this.getById(id);
-        if (country.isEmpty())
-            return Optional.empty();
+        if (country.isEmpty()) return Optional.empty();
 
         var ruler = this.rulerService.getRulerByCountryId(id);
         ruler.ifPresent(value -> this.rulerService.deleteById(value.getId()));
@@ -60,10 +54,8 @@ public class CountryService {
         updatedCountry.setName(country.name());
         updatedCountry.setGdp(country.gdp());
         updatedCountry.setFormationYear(country.formationYear());
-        updatedCountry.setIsInEurope(country.isInEurope());
+        updatedCountry.setInEurope(country.isInEurope());
 
-        return Optional.of(
-                this.countryRepository.save(updatedCountry)
-        );
+        return Optional.of(this.countryRepository.save(updatedCountry));
     }
 }

@@ -2,10 +2,10 @@ package org.example.springguide.controllers;
 
 import org.example.springguide.domains.Country;
 import org.example.springguide.domains.CountryDTO;
-import org.example.springguide.domains.CountryWithRulerDTO;
 import org.example.springguide.services.CountryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import lombok.val;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class CountryController {
 
     @GetMapping("{id}")
     ResponseEntity<Country> getCountryById(@PathVariable long id) {
-        var country = this.countryService.getById(id);
+        val country = this.countryService.getById(id);
 
         return country
                 .map(ResponseEntity::ok)
@@ -40,7 +40,7 @@ public class CountryController {
 
     @DeleteMapping("{id}")
     ResponseEntity<Country> deleteCountry(@PathVariable long id) {
-        var deletedCountry = this.countryService.deleteById(id);
+        val deletedCountry = this.countryService.deleteById(id);
 
         return deletedCountry
                 .map(ResponseEntity::ok)
@@ -49,7 +49,7 @@ public class CountryController {
 
     @PutMapping("{id}")
     ResponseEntity<Country> updateCountry(@PathVariable long id, @RequestBody CountryDTO country) {
-        var updatedCountry = this.countryService.updateCountryById(id, country);
+        val updatedCountry = this.countryService.updateCountryById(id, country);
 
         return updatedCountry
                 .map(ResponseEntity::ok)
