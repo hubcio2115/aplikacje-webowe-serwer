@@ -11,3 +11,11 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: update
+
+application:
+  security:
+    jwt:
+      secret-key: KVABHD/yeS0sZ85kQq4hlFNXYc0ZlktGRPdEW9MTEIE=
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
