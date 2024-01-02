@@ -1,21 +1,18 @@
 package org.example.server.services;
 
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.example.server.domains.country.Country;
 import org.example.server.domains.ruler.Ruler;
 import org.example.server.domains.ruler.RulerDTO;
 import org.example.server.domains.ruler.RulerRepository;
 import org.springframework.stereotype.Service;
-import lombok.val;
-
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class RulerService {
   private final RulerRepository rulerRepository;
-
-  public RulerService(RulerRepository rulerRepository) {
-    this.rulerRepository = rulerRepository;
-  }
 
   private Optional<Ruler> getById(long id) {
     return this.rulerRepository.findById(id);
