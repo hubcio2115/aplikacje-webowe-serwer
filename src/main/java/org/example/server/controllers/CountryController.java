@@ -1,7 +1,8 @@
 package org.example.server.controllers;
 
-import org.example.server.domains.Country;
-import org.example.server.domains.CountryDTO;
+import lombok.RequiredArgsConstructor;
+import org.example.server.domains.country.Country;
+import org.example.server.domains.country.CountryDTO;
 import org.example.server.services.CountryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,47 +13,42 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("api/countries")
+@RequiredArgsConstructor
 public class CountryController {
-    private final CountryService countryService;
+  private final CountryService countryService;
 
-    public CountryController(CountryService countryService) {
-        this.countryService = countryService;
-    }
+  @GetMapping
+  ResponseEntity<List<Country>> getCountries() {
+    return ResponseEntity.ok(this.countryService.getCountries());
+  }
 
-    @GetMapping
-    ResponseEntity<List<Country>> getCountries() {
-        return ResponseEntity.ok(this.countryService.getCountries());
-}
+  @GetMapping("{id}")
+  ResponseEntity<Country> getCountryById(@PathVariable long id) {
+    val country = this.countryService.getById(id);
 
-    @GetMapping("{id}")
-    ResponseEntity<Country> getCountryById(@PathVariable long id) {
-        val country = this.countryService.getById(id);
+    return country.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+  }
 
-        return country
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+  @PostMapping
+  ResponseEntity<Country> addCountry(@RequestBody CountryDTO newCountry) {
+    return ResponseEntity.ok(this.countryService.addCountry(newCountry));
+  }
 
-    @PostMapping
-    ResponseEntity<Country> addCountry(@RequestBody CountryDTO newCountry) {
-        return ResponseEntity.ok(this.countryService.addCountry(newCountry));
-    }
+  @DeleteMapping("{id}")
+  ResponseEntity<Country> deleteCountry(@PathVariable long id) {
+    val deletedCountry = this.countryService.deleteById(id);
 
-    @DeleteMapping("{id}")
-    ResponseEntity<Country> deleteCountry(@PathVariable long id) {
-        val deletedCountry = this.countryService.deleteById(id);
+    return deletedCountry
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
 
-        return deletedCountry
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+  @PutMapping("{id}")
+  ResponseEntity<Country> updateCountry(@PathVariable long id, @RequestBody CountryDTO country) {
+    val updatedCountry = this.countryService.updateCountryById(id, country);
 
-    @PutMapping("{id}")
-    ResponseEntity<Country> updateCountry(@PathVariable long id, @RequestBody CountryDTO country) {
-        val updatedCountry = this.countryService.updateCountryById(id, country);
-
-        return updatedCountry
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    return updatedCountry
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
 }
