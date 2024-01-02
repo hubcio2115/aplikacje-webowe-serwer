@@ -1,11 +1,11 @@
 package org.example.server.domains.country;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.*;
-import org.example.server.domains.ruler.Ruler;
-
 import java.io.Serializable;
 import java.time.Year;
+import lombok.*;
+import org.example.server.domains.ruler.Ruler;
 
 @Entity
 @Table
@@ -26,6 +26,7 @@ public class Country implements Serializable {
   private long gdp;
 
   @Column(name = "is_in_europe")
+  @JsonProperty("isInEurope")
   private boolean isInEurope;
 
   @Column(name = "formation_year")

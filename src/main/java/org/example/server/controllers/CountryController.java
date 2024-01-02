@@ -1,14 +1,13 @@
 package org.example.server.controllers;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.example.server.domains.country.Country;
 import org.example.server.domains.country.CountryDTO;
 import org.example.server.services.CountryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import lombok.val;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController

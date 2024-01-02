@@ -1,13 +1,12 @@
 package org.example.server.services;
 
+import java.util.List;
+import java.util.Optional;
+import lombok.val;
 import org.example.server.domains.country.Country;
 import org.example.server.domains.country.CountryDTO;
 import org.example.server.domains.country.CountryRepository;
 import org.springframework.stereotype.Service;
-import lombok.val;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CountryService {
